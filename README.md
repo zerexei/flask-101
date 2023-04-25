@@ -1,5 +1,14 @@
 # Flask framework 101
 
-### Create a virtual env
+### create a virtual env
 
-python -m venv venv
+```bash
+pipenv shell # move to venv
+pipenv install <package> # install packages
+```
+
+### define env
+```
+export FLASK_APP=hello
+export FLASK_ENV=development
+```
