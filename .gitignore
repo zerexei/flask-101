@@ -1,0 +1,23 @@
+# Ignore Python bytecode files
+__pycache__/
+
+# Ignore local Flask instance folder
+instance/
+
+# Ignore local development configuration
+config.py
+
+# Ignore log files
+*.log
+
+# Ignore environment variables
+.env
+.env.*
+
+# Ignore IDE files
+.vscode/
+*.pyc
+*.pyo
+*.egg-info
+
+venv
