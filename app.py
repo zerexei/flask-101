@@ -3,13 +3,13 @@ import json
 import os.path
 from pprint import pprint
 
+from tesseract import Tesseract
+
 app = Flask(__name__)
 app.secret_key = "secret123"
 
 @app.route('/')
 def home():
-    pprint(request.form)
-    print("asd")
     return render_template('welcome.html')
 
 # TODO: test form input
@@ -32,5 +32,20 @@ def url_shorter():
 
 @app.get('/redirect-to-home')
 def redirect_to_home():
+    # url_for(<function_name>)
+    return redirect(url_for('home'))
+
+@app.post('/ocr')
+def ocr():
+    
+    # print(request.method)
+    image = request.files['image']
+    
+    ts = Tesseract()
+    
+    print("====================")
+    print(ts.parse(image))
+    print("====================")
+
     # url_for(<function_name>)
     return redirect(url_for('home'))
