@@ -69,3 +69,9 @@ def ocr():
 
     # url_for(<function_name>)
     return redirect(url_for('home'))
+
+
+# create a 404 page
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('page_not_found.html'), 404
