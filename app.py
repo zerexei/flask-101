@@ -12,8 +12,7 @@ app.secret_key = "secret123"
 def home():
     return render_template('welcome.html')
 
-# TODO: test form input
-@app.post('/url-shorter')
+@app.post('/url-shortener')
 def url_shorter():
     urls = {}
 
@@ -21,14 +20,35 @@ def url_shorter():
         with open('urls.json') as urls_file:
             urls = json.load(urls_file)
 
-    if request.form['code'] in urls.keys():
+    if request.form['url_name'] in urls.keys():
         flash("short name already taken")
         return redirect(url_for('home'))
     
-    urls[request.form['code']] = {'url': request.form['url']}
+    urls[request.form['url_name']] = {'url': request.form['url']}
+    
     with open ('urls.json', 'w') as url_file:
         json.dump(urls, url_file)
-    return "shorter"
+
+    return redirect(url_for('home'))
+
+@app.post('/file-url-shortener')
+def file_url_shorter():
+    urls = {}
+
+    if os.path.exists('urls.json'):
+        with open('urls.json') as urls_file:
+            urls = json.load(urls_file)
+
+    # if request.form['url_name'] in urls.keys():
+    #     flash("short name already taken")
+    #     return redirect(url_for('home'))
+    
+    # urls[request.form['url_name']] = {'url': request.form['url']}
+    
+    # with open ('urls.json', 'w') as url_file:
+    #     json.dump(urls, url_file)
+
+    return redirect(url_for('home'))
 
 @app.get('/redirect-to-home')
 def redirect_to_home():
